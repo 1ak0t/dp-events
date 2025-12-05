@@ -1,0 +1,135 @@
+###
+POST https://corp.severskcable.ru:4875/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "surname": "Иванников",
+  "name": "Николай",
+  "middleName": "Николаевич",
+  "email": "inn@severskcable.ru",
+  "role": [
+    "Снабжение"
+  ],
+  "password": "7fNBY6Ar"
+ }
+
+###
+POST http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "it2@severskcable.ru",
+  "password": "12345"
+}
+
+###
+GET http://localhost:5000/ HTTP/1.1
+
+###
+GET http://localhost:5000/users/ HTTP/1.1
+Content-Type: application/json
+
+###
+GET http://localhost:5000/notifications/ HTTP/1.1
+Content-Type: application/json
+
+###
+GET http://localhost:5000/breaks/ HTTP/1.1
+Content-Type: application/json
+
+###
+POST http://localhost:5000/breaks/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "breakName": "Ролики",
+  "registerPerson": "66d14354039b2f5d6b2d2147",
+  "registerDate": "12312412",
+  "priority": 1,
+  "status": false,
+  "stages": null,
+  "machine": "66d56c486ef45e1624a88b97"
+}
+
+
+###
+PATCH http://localhost:5000/breaks/66d82f4a54ecad33bad17bda HTTP/1.1
+Content-Type: application/json
+
+{
+  "successPerson": "",
+  "successDate": string;
+  "successComment": string;
+  "repairingPerson": string;
+  "repairingDate": string;
+  "repairingComment": string;
+  "repairCompletedPerson": string;
+  "repairCompletedDate": string;
+  "repairCompletedComment": string;
+  "repairEndPerson": string;
+  "repairEndDate": string;
+  "repairEndComment": string;
+  "status": boolean;
+  "stages": RepairStage | null;
+  "machine": string;
+}
+
+###
+DELETE http://localhost:5000/breaks/66d9517b61ab117cc609deee HTTP/1.1
+
+###
+POST https://corp.severskcable.ru:4875/machines/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Отрезной станок",
+  "status": "Работает"
+}
+
+###
+PATCH http://localhost:5000/machines/66d6dcaf91558b9ce863739d HTTP/1.1
+Content-Type: application/json
+
+{
+"status": "Требует внимания"
+}
+
+###
+GET http://localhost:5000/machines/ HTTP/1.1
+Content-Type: application/json
+
+###
+POST http://localhost:5000/break-types-by-machine/create HTTP/1.1
+Content-Type: application/json
+
+{
+  "description": "Отломилась ручка",
+  "machine": "66d56c486ef45e1624a88b97"
+}
+
+###
+GET http://localhost:5000/break-types-by-machine/ HTTP/1.1
+Content-Type: application/json
+
+###
+POST http://localhost:5000/supplies/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "break": "67551cca327ea222ca4eeca5",
+  "supplyDescription": "Test supply 2",
+  "supplyImage": "",
+  "supplyStatus": "Ожидает оплаты"
+}
+
+###
+PATCH http://localhost:5000/supplies/6759198ba72c1748e8be0195/change-status/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "supplyStatus": "Ожидает поступления"
+}
+
+###
+GET http://localhost:5000/supplies/67551cca327ea222ca4eeca5/find-by-break/ HTTP/1.1
+Content-Type: application/json
