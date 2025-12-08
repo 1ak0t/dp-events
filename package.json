@@ -1,7 +1,7 @@
 {
-  "name": "severskcable-status-back",
+  "name": "dp-events",
   "version": "1.0.0",
-  "description": "Backend to severskcable-status",
+  "description": "Backend to dp-events",
   "main": "main.ts",
   "type": "module",
   "engines": {
@@ -15,7 +15,7 @@
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
-    "ts": "tsc --noEmit && node --no-warnings=ExperimentalWarning --loader ts-node/esm",
+    "ts": "tsc --noEmit && node --no-warnings=ExperimentalWarning --loader ts-node/esm --inspect=0.0.0.0:9229",
     "mock:server": "json-server ./mocks/mock-server-data.json --port 3123 --host localhost"
   },
   "author": "KotIA",

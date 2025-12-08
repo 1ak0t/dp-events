@@ -7,4 +7,5 @@ export class CreateUserDto {
     public email: string;
     public role: UserRoles[];
     public password: string;
+    public jobTitle: string;
 }

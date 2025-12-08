@@ -19,4 +19,7 @@ export class UserRdo {
 
     @Expose()
     public notificationsCount: string;
+
+    @Expose()
+    public jobTitle: string;
 }

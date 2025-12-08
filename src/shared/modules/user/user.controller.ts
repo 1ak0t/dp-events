@@ -18,6 +18,7 @@ import {SubscriptionServiceInterface} from "../subscription/subscription-service
 import {ValidateObjectidMiddleware} from "../../libs/rest/middleware/validate-objectid.middleware.js";
 import {PrivateRouteMiddleware} from "../../libs/rest/middleware/private-route.middleware.js";
 import {PushSubscriptionDTO} from "../subscription/dto/create-subscription.dto.js";
+import {UpdateUserDto} from "./dto/update-user.dto.js";
 
 @injectable()
 export class UserController extends BaseControllerAbstract {
@@ -33,6 +34,11 @@ export class UserController extends BaseControllerAbstract {
         this.logger.info('Register routes for UserController...');
 
         this.addRoute({path: '/register', method: HttpMethodEnum.Post, handler: this.create});
+        this.addRoute({
+            path: '/update',
+            method: HttpMethodEnum.Post,
+            handler: this.updateUser,
+        });
         this.addRoute({
             path: '/',
             method: HttpMethodEnum.Get,
@@ -111,6 +117,7 @@ export class UserController extends BaseControllerAbstract {
             middleName: user.middleName,
             email: user.email,
             role: user.role,
+            jobTitle: user.jobTitle,
             token
         });
         this.ok(res, responseData);
@@ -128,6 +135,27 @@ export class UserController extends BaseControllerAbstract {
         }
 
         this.ok(res, fillDTO(LoggedUserRdo, foundedUser));
+    }
+
+    public async updateUser(
+        {body}: Request<ParamUserType, unknown, UpdateUserDto>,
+        res: Response,
+    ): Promise<void> {
+        const updatedDTO = {...body};
+
+        if (body.email) {
+            const user = await this.userService.findByEmail(body.email);
+            if (user){
+                await this.userService.findByIdAndUpdate(user.id, updatedDTO);
+                this.created(res, "User updated");
+            }
+        } else {
+            throw new HttpError(
+                StatusCodes.NOT_FOUND,
+                'Пользователь не найден',
+                'UserController'
+            );
+        }
     }
 
     public async subscribe(

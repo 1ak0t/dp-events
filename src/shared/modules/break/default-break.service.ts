@@ -45,12 +45,7 @@ export class DefaultBreakService implements BreakServiceInterface {
 
         const machine = await this.machineService.findById(dto.machine);
         const rolesForSubs = [
-            UserRoles.CEO,
-            UserRoles.ITR,
-            UserRoles.Admin,
-            UserRoles.Engineers,
-            UserRoles.HeadEngineer,
-            UserRoles.Operator
+            UserRoles.Admins
         ];
 
         const subscriptions = await this.subscriptionService.getAll(rolesForSubs);
@@ -107,12 +102,7 @@ export class DefaultBreakService implements BreakServiceInterface {
         if(dto.machine) {
             const machine = await this.machineService.findById(dto.machine);
             const rolesForSubs = [
-                UserRoles.CEO,
-                UserRoles.ITR,
-                UserRoles.Admin,
-                UserRoles.Engineers,
-                UserRoles.HeadEngineer,
-                UserRoles.Operator
+                UserRoles.Admins
             ];
 
             const subscriptions = await this.subscriptionService.getAll(rolesForSubs);

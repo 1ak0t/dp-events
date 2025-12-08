@@ -25,4 +25,7 @@ export class LoggedUserRdo {
 
     @Expose()
     public notificationsCount: string;
+
+    @Expose()
+    public jobTitle: string;
 }

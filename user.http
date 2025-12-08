@@ -1,32 +1,42 @@
 ###
-POST https://corp.severskcable.ru:4875/users/register HTTP/1.1
+POST http://localhost:13582/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "surname": "Иванников",
-  "name": "Николай",
-  "middleName": "Николаевич",
-  "email": "inn@severskcable.ru",
+  "surname": "Золотарева",
+  "name": "Маргарита",
+  "middleName": "Станиславовна",
+  "email": "seversk@detail-project.ru",
   "role": [
-    "Снабжение"
+    "Секретари"
   ],
-  "password": "7fNBY6Ar"
+  "password": "12345",
+  "jobTitle": "Секретарь"
  }
 
 ###
-POST http://localhost:5000/users/login HTTP/1.1
+POST http://localhost:13582/users/update HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "it2@severskcable.ru",
+  "email": "seversk@detail-project.ru",
+  "jobTitle": "Секретарь"
+}
+
+###
+POST http://localhost:13582/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "seversk@detail-project.ru",
   "password": "12345"
 }
 
 ###
-GET http://localhost:5000/ HTTP/1.1
+GET http://localhost:13582/ HTTP/1.1
 
 ###
-GET http://localhost:5000/users/ HTTP/1.1
+GET http://localhost:13582/users/ HTTP/1.1
 Content-Type: application/json
 
 ###
