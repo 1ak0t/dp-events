@@ -1,11 +1,7 @@
 export enum UserRoles {
-    Operator = "Оператор",
-    ITR = "ИТР",
-    Engineers = "Инженеры",
-    HeadEngineer = "Главный инженер",
-    CEO = "Генеральный директор",
-    Admin = "Администратор",
-    Supply = "Снабжение"
+    Admins = "Администраторы",
+    Secretaries = "Секретари",
+    Users = "Пользователи"
 }
 
 export type UserType = {
@@ -14,4 +10,5 @@ export type UserType = {
     middleName: string;
     email: string;
     role: UserRoles[];
+    jobTitle: string;
 }
