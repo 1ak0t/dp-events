@@ -16,6 +16,8 @@ export type RestSchema = {
     UPLOAD_DIRECTORY: string;
     SUBSCRIBE_PUB_KEY: string;
     SUBSCRIBE_PRIV_KEY: string;
+    EMAIL: string;
+    EMAIL_PASSWORD: string;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -89,6 +91,18 @@ export const configRestSchema = convict<RestSchema>({
         doc: 'Subscription public key',
         format: String,
         env: 'SUBSCRIBE_PUB_KEY',
+        default: null
+    },
+    EMAIL: {
+        doc: 'Email for sending events notification',
+        format: String,
+        env: 'EMAIL',
+        default: null
+    },
+    EMAIL_PASSWORD: {
+        doc: 'Password for email',
+        format: String,
+        env: 'EMAIL_PASSWORD',
         default: null
     },
 });

@@ -12,4 +12,5 @@ export interface UserServiceInterface {
     findByIdAndUpdate(userId: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null>;
     increaseNotificationCount(): void;
     resetNotificationCount(userId: string): void;
+    delete(userId: string): Promise<void>;
 }

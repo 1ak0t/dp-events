@@ -48,6 +48,10 @@ export class DefaultUserService implements UserServiceInterface {
         return this.create(dto, salt);
     }
 
+    public async delete(userId:string): Promise<void> {
+       await this.userModel.findByIdAndDelete(userId);
+    }
+
     public async findByIdAndUpdate(userId: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null> {
         return this.userModel.findByIdAndUpdate(userId, dto, {new: true});
     }

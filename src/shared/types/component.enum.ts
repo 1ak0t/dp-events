@@ -27,4 +27,9 @@ export const Component = {
     SupplyModel: Symbol.for('SupplyModel'),
     SupplyService: Symbol.for('SupplyService'),
     SupplyController: Symbol.for('SupplyController'),
+    EventModel: Symbol.for('EventModel'),
+    EventService: Symbol.for('EventService'),
+    EventController: Symbol.for('EventController'),
+    NodemailerService: Symbol.for('NodemailerService'),
+    CronService: Symbol.for('CronService'),
 } as const;

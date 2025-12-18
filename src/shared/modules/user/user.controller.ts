@@ -33,11 +33,23 @@ export class UserController extends BaseControllerAbstract {
 
         this.logger.info('Register routes for UserController...');
 
-        this.addRoute({path: '/register', method: HttpMethodEnum.Post, handler: this.create});
         this.addRoute({
-            path: '/update',
+            path: '/register',
             method: HttpMethodEnum.Post,
+            handler: this.create,
+            middlewares: [new PrivateRouteMiddleware()]
+        });
+        this.addRoute({
+            path: '/:userId/update',
+            method: HttpMethodEnum.Patch,
             handler: this.updateUser,
+            middlewares: [new PrivateRouteMiddleware()]
+        });
+        this.addRoute({
+            path: '/:userId/delete',
+            method: HttpMethodEnum.Delete,
+            handler: this.deleteUser,
+            middlewares: [new PrivateRouteMiddleware()]
         });
         this.addRoute({
             path: '/',
@@ -138,16 +150,35 @@ export class UserController extends BaseControllerAbstract {
     }
 
     public async updateUser(
-        {body}: Request<ParamUserType, unknown, UpdateUserDto>,
+        {body, params}: Request<ParamUserType, unknown, UpdateUserDto>,
         res: Response,
     ): Promise<void> {
         const updatedDTO = {...body};
 
-        if (body.email) {
-            const user = await this.userService.findByEmail(body.email);
+        if (params.userId) {
+            const user = await this.userService.findById(params.userId);
             if (user){
                 await this.userService.findByIdAndUpdate(user.id, updatedDTO);
                 this.created(res, "User updated");
+            }
+        } else {
+            throw new HttpError(
+                StatusCodes.NOT_FOUND,
+                'Пользователь не найден',
+                'UserController'
+            );
+        }
+    }
+
+    public async deleteUser(
+        {params}: Request<ParamUserType, unknown, unknown>,
+        res: Response,
+    ): Promise<void> {
+        if (params.userId) {
+            const user = await this.userService.findById(params.userId);
+            if (user){
+                await this.userService.delete(user.id);
+                this.ok(res, "User deleted");
             }
         } else {
             throw new HttpError(
