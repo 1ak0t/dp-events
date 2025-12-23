@@ -46,7 +46,7 @@ export class CronService implements CronServiceInterface{
         events.map(event => {
             const dayLost = dayjs(event.deadLine).diff(dayjs(), 'days')+1;
             let emailHTMLBody = '';
-            const confirmLink = `<a href=\"http://localhost:3000/success-warning/${event.id}\">Перейдите по ссылке для подтверждения об ознакомлении</a>`
+            const confirmLink = `<a href=\"https://events.detail-project.ru/success-warning/${event.id}\">Перейдите по ссылке для подтверждения об ознакомлении</a>`
             console.log(dayLost)
             if (!(event.mainPerson instanceof Types.ObjectId) && !(event.createPerson instanceof Types.ObjectId)) {
                 emailHTMLBody = `<h1>${event.name} ${event.jobName} - до конца срока ${dayLost} дней!</h1>
@@ -68,9 +68,9 @@ export class CronService implements CronServiceInterface{
             }
             if ((dayLost === 45 || dayLost === 30 || dayLost <= 15) && emailHTMLBody !== '') {
                 if (dayLost === 30) {
-                    this.addMailSend(['i.kot@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody+confirmLink, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
+                    this.addMailSend(['i.kot@detail-project.ru', 'a.tarasenko@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody+confirmLink, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
                 } else {
-                    this.addMailSend(['i.kot@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
+                    this.addMailSend(['i.kot@detail-project.ru', 'a.tarasenko@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
                 }
             }
         })
