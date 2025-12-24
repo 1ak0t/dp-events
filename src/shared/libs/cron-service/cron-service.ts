@@ -68,9 +68,9 @@ export class CronService implements CronServiceInterface{
             }
             if ((dayLost === 45 || dayLost === 30 || dayLost <= 15) && emailHTMLBody !== '') {
                 if (dayLost === 30) {
-                    this.addMailSend(['i.kot@detail-project.ru', 'a.tarasenko@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody+confirmLink, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
+                    this.addMailSend(['i.kot@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody+confirmLink, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
                 } else {
-                    this.addMailSend(['i.kot@detail-project.ru', 'a.tarasenko@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
+                    this.addMailSend(['i.kot@detail-project.ru'], `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`, emailHTMLBody, `${event.name} ${event.jobName} - до конца срока ${dayLost} дней!`);
                 }
             }
         })
