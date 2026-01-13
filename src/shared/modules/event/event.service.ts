@@ -8,6 +8,7 @@ import {DocumentType} from "@typegoose/typegoose/lib/types.js";
 import {types} from "@typegoose/typegoose";
 import {EventStatuses} from "../../types/event.type.js";
 import {UserServiceInterface} from "../user/user-service.interface.js";
+import {UpdateEventDto} from "./dto/update-event.dto.js";
 // import {CronServiceInterface} from "../../libs/cron-service/cron-service.interface.js";
 
 @injectable()
@@ -58,29 +59,46 @@ export class EventService implements EventServiceInterface {
         return this.eventModel.findById(eventId);
     }
 
-
+    public async delete(eventId: string): Promise<void> {
+        await this.eventModel.findByIdAndDelete(eventId);
+    }
 
     public async findByIdAndUpdateReadPerson(userId: string, eventId: string): Promise<DocumentType<EventEntity> | null> {
-        const event = await this.eventModel.findById(eventId);
+        const event = await this.eventModel.findById(eventId).populate([
+            'mainPerson',
+            'readPerson',
+            'completedPerson',
+            'createPerson',
+        ]);
         if (event !== null) {
-            let currentReadPerson = event.readPerson;
-            const user = await this.userService.findById(userId);
-            if (user !== null) {
-                if (currentReadPerson === null) {
-                    const readUser = [user.id]
-                    currentReadPerson = readUser;
-                } else {
-                    currentReadPerson.push(user.id);
-                }
+            console.log(event.readPerson);
+            let currentReadPerson: any = [];
+            if (event.readPerson !== null) {
+                currentReadPerson = event.readPerson;
             }
-            console.log(currentReadPerson);
-            return this.eventModel.findByIdAndUpdate(eventId, {readPerson: currentReadPerson}, {new: true}).populate([
-                'mainPerson',
-                'readPerson',
-                'completedPerson',
-                'createPerson',
-            ]);
+            const user = await this.userService.findById(userId);
+            if (user !== null && event.readPerson !== null) {
+                currentReadPerson.push(user);
+            }
+
+            // const result = await this.eventModel.updateOne({ id: eventId }, { $push: { fans: { $each: [userId] } } }).populate([
+            //     'mainPerson',
+            //     'readPerson',
+            //     'completedPerson',
+            //     'createPerson',
+            // ])
+            return event;
         }
         return null;
+    }
+
+    public async updateById(eventId: string, dto: UpdateEventDto): Promise<DocumentType<EventEntity> | null> {
+        const update = await this.eventModel.findByIdAndUpdate(eventId, dto).populate([
+            'mainPerson',
+            'readPerson',
+            'completedPerson',
+            'createPerson',
+        ]).exec();
+        return update;
     }
 }

@@ -2,7 +2,7 @@ import {EventStatuses} from "../../../types/event.type.js";
 import {UserEntity} from "../../user/index.js";
 
 export class UpdateEventDto {
-    id: string;
+    id?: string;
     deadLine?: string;
     documents?: string;
     mainPerson?: string;
@@ -11,5 +11,5 @@ export class UpdateEventDto {
     completedTime?: string;
     completedComment?: string;
     completedFile?: string;
-    completedPerson?: UserEntity;
+    completedPerson?: string;
 }

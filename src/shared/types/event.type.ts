@@ -2,5 +2,6 @@ export enum EventStatuses {
     Planed = "Запланировано",
     Attention = "Требует внимания",
     Warning = "Важно",
-    Critical = "Критический"
+    Critical = "Критический",
+    Completed = "Завершено"
 }

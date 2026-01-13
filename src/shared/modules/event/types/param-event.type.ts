@@ -4,3 +4,7 @@ export type ParamEventType = {
     userId: string;
     eventId: string;
 } | ParamsDictionary;
+
+export type ParamEventIdType = {
+    eventId: string;
+} | ParamsDictionary;
