@@ -15,9 +15,10 @@ export class Nodemailer implements NodemailerInterface {
     }
     public async sendEmail(recipients: string[], title: string, htmlBody: string, text: string): Promise<void> {
         const transporter = nodemailer.createTransport({
-            host: "smtp.detail-project.ru",
-            port: 465,
-            secure: true,
+            host: "172.31.2.11",
+            port: 25,
+            secure: false,
+            ignoreTLS: true,
             auth: {
                 user: this.config.get('EMAIL'),
                 pass: this.config.get('EMAIL_PASSWORD'),
