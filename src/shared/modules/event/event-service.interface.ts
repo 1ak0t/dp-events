@@ -8,7 +8,7 @@ export interface EventServiceInterface {
     create(dto: CreateEventDto): Promise<DocumentType<EventEntity>>;
     findAll(): Promise<EventEntity[]>;
     findByIdAndUpdateStatus(id: string, status: EventStatuses): Promise<DocumentType<EventEntity> | null>;
-    findByIdAndUpdateReadPerson(userId: string, eventId: string): Promise<DocumentType<EventEntity> | null>;
+    findByIdAndUpdateReadPerson(userId: string, eventId: string): Promise<void>;
     findById(eventId: string): Promise<DocumentType<EventEntity> | null>;
     delete(eventId: string): Promise<void>;
     updateById(eventId: string, dto: UpdateEventDto): Promise<DocumentType<EventEntity> | null>;

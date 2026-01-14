@@ -6,7 +6,7 @@ export class CreateEventDto {
     name: string;
     deadLine: string;
     documents: string;
-    mainPerson: string;
+    mainPerson: string[];
     createPerson: string;
     readPerson: UserEntity[] | null;
     status: EventStatuses | null;

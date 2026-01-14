@@ -15,13 +15,13 @@ export class EventRdo {
     public documents: string;
     @Expose()
     @Type(() => UserRdo)
-    public mainPerson: UserRdo;
+    public mainPerson: UserRdo[];
     @Expose()
     @Type(() => UserRdo)
     public createPerson: UserRdo;
     @Expose()
     @Type(() => UserRdo)
-    public readPerson: UserRdo[] | null;
+    public readPerson: UserRdo[];
     @Expose()
     public status: EventStatuses | null;
     @Expose()

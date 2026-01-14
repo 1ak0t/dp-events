@@ -21,8 +21,9 @@ export class EventEntity extends defaultClasses.TimeStamps {
     public documents: string;
     @prop({
         ref: UserEntity,
+        default: []
     })
-    public mainPerson: Ref<UserEntity>;
+    public mainPerson: Ref<UserEntity>[];
     @prop({
         ref: UserEntity,
         required: true,
@@ -30,8 +31,9 @@ export class EventEntity extends defaultClasses.TimeStamps {
     public createPerson: Ref<UserEntity>;
     @prop({
         ref: UserEntity,
+        default: []
     })
-    public readPerson: Ref<UserEntity>[] | null;
+    public readPerson: Ref<UserEntity>[];
     @prop({
         type: String,
         enum: EventStatuses,

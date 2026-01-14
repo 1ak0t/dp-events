@@ -48,14 +48,12 @@ export class CronService implements CronServiceInterface{
                 const dayLost = dayjs(event.deadLine).diff(dayjs(), 'days')+1;
                 let emailHTMLBody = '';
                 const confirmLink = `<a href=\"https://events.detail-project.ru/success-warning/${event.id}\">Перейдите по ссылке для подтверждения об ознакомлении</a>`
-                console.log(dayLost)
                 if (!(event.mainPerson instanceof Types.ObjectId) && !(event.createPerson instanceof Types.ObjectId)) {
                     emailHTMLBody = `<h1>${event.name} ${event.jobName} - до конца срока ${dayLost} дней!</h1>
                                     <p><b>Нименование работ: </b>${event.name}</p>
                                     <p><b>Нименование ключевого события: </b>${event.jobName}</p>
                                     <p><b>Срок достижения: </b>${event.deadLine}</p>
                                     <p><b>Отчетная документация: </b>${event.documents}</p>
-                                    <p><b>Ответственный: </b>${event.mainPerson.surname} ${event.mainPerson.name}</p>
                                     <p><b>Автор: </b>${event.createPerson.surname} ${event.createPerson.name}</p>`;
                 }
                 if (dayLost <= 45 && dayLost > 30) {
